@@ -10,7 +10,7 @@ module.exports = {
 	output: {
 		clean: true,
 		filename: '[name][contenthash].js',
-		path: path.resolve(__dirname, "dist"),
+		path: path.resolve(__dirname, 'dist'),
 		assetModuleFilename: '[name][ext]',
 	},
 	module: {
@@ -51,6 +51,6 @@ module.exports = {
 		historyApiFallback: true,
 		hot: true,
 		open: true,
-		port: 3000,
+		port: 3030,
 	},
-}
+};

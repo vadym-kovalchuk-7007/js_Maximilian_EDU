@@ -7,11 +7,11 @@ const company = {
 		let currEmployee = 0;
 		while (currEmployee < this.employees.length) {
 			yield this.employees[currEmployee];
-			currEmployee++
+			currEmployee++;
 		}
 	},
-}
+};
 
 for (const employee of company) {
-	console.log(employee)
+	console.log(employee);
 }
