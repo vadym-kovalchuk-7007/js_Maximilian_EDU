@@ -9,7 +9,6 @@ const getLocationBtn = document.getElementById('getLocation');
 getLocationBtn.addEventListener('click', getLocation);
 
 async function firstFunc() {
-	console.log('Scripter');
 	const joke = await generateJoke();
 	document.getElementById('someP').innerHTML = joke.data.joke;
 	fetch('http://localhost:3000/add-location', {
@@ -23,14 +22,30 @@ async function firstFunc() {
 		}
 	})
 		.then(response => response.json())
-		.then(data => { console.log(data); });
+		.then(data => {
+			if (getLocationBtn.hasAttribute('disabled')) getLocationBtn.removeAttribute('disabled');
+			console.log(data);
+		});
 }
 async function checkPromise() {
 	const prom = await promise();
 	console.log(`result from promise ${prom}`);
 }
+
+function getLocationsLength() {
+	fetch('http://localhost:3000/locations', {
+		method: 'GET',
+		headers: { 'Content-Type': 'application/json' }
+	})
+		.then(response => response.json())
+		.then(data => {
+			if (!data.ids) {
+				getLocationBtn.setAttribute('disabled', '');
+			}
+		});
+}
 function getLocation() {
-	fetch('http://localhost:3000/location/' + 0, {
+	fetch('http://localhost:3000/location/' + 1, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'
@@ -38,7 +53,6 @@ function getLocation() {
 	})
 		.then(response => {
 			if (response.status === 404) {
-				console.log('here');
 				throw new Error('oops! Not in arr');
 			}
 			return response.json();
@@ -63,3 +77,4 @@ const getJokeBtn = document.getElementsByTagName('button')[0];
 getJokeBtn.addEventListener('click', firstFunc);
 
 checkPromise();
+getLocationsLength();
