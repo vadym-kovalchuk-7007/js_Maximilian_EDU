@@ -1,6 +1,6 @@
-import gas from './assets/GasNov.png';
-import { generateJoke } from './joke';
-import { prom as promise } from './prom.js';
+const gas = require('./assets/GasNov.png');
+const { generateJoke } = require('./joke');
+const { prom: promise } = require('./prom.js');
 import './styles/main.scss';
 
 const gasImg = document.getElementById('gasPc');
@@ -25,7 +25,8 @@ async function firstFunc() {
 		.then(data => {
 			if (getLocationBtn.hasAttribute('disabled')) getLocationBtn.removeAttribute('disabled');
 			console.log(data);
-		});
+		})
+		.catch(err => console.log('Network', err));
 }
 async function checkPromise() {
 	const prom = await promise();
@@ -42,7 +43,10 @@ function getLocationsLength() {
 			if (!data.ids) {
 				getLocationBtn.setAttribute('disabled', '');
 			}
-		});
+			return data.ids;
+		})
+		.then(idsLength => idsLength)
+		.catch((error) => console.log('Network', error));
 }
 function getLocation() {
 	fetch('http://localhost:3000/location/' + 1, {

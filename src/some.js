@@ -1,5 +1,3 @@
-console.log('Some JS file');
-
 const company = {
 	employees: ['Vad', 'Vet', 'Anna'],
 	year: '2021',
@@ -12,6 +10,12 @@ const company = {
 	},
 };
 
-for (const employee of company) {
-	console.log(employee);
-}
+const getEmployees = () => {
+	const employees = [];
+	for (const employee of company) {
+		employees.push(employee);
+	}
+	return employees;
+};
+
+module.exports = { company, getEmployees };
